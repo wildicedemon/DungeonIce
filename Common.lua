@@ -27,3 +27,28 @@ function FindDead()
 		end
 	end
 end
+
+--Pet Heal the lowest Health party member, currently SetUp for EOS, and Selane
+function PetPartyHealAssist()
+local pet = Player.pet
+local PetHeals = ActionList("type=11")
+local PetHeal = PetHeals[32]
+if pet.contentid == 1399 then
+	local PetHeal = PetHeals[36]
+end
+local acPetHeal = ActionList:Get(PetHeal.id,PetHealTarget.id,13)
+local PetHealTarget = GetBestSummonHealTarget()
+	if Debugy == "1" then
+		d("Entering Pet Heal Assist =  "..tostring(PetHealTarget.name))
+	end
+		if (PetHealTarget ~= nil) and(PetHealTarget.hp.percent < 100) then
+			if Debugy == "1" then
+				d("Preparing to Cast Embrace On =  "..tostring(PetHealTarget.name)..",  Hp Percentage at =  "..tostring(PetHealTarget.hp.percent))
+			end
+			if ( pet ~= nil and pet ~= 0) then
+				if (acPetHeal.isready) then
+					acPetHeal:Cast()
+				end
+			end
+		end
+end

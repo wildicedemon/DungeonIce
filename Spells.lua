@@ -24,4 +24,3 @@ function SwiftCastRez()
 		end
 	end
 end
-
